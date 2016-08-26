@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "Text to Speech extension",
+  "version": "1.0",
+  "applications": {
+    "gecko": {
+      "id": "ondoku@mozilla.org",
+      "strict_min_version": "45.0",
+      "strict_max_version": "*"
+    }
+  },
+
+  "description": "Turn selected text in a web site into voice speech using ResponsiveVoice.JS",
+  "homepage_url": "https://github.com/Hinaser/ondoku",
+  "commands": {
+    "toggle-feature": {
+      "suggested-key": {
+        "default": "Insert"
+      },
+      "description": "Send a toggle-feature event"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*/*"
+      ],
+      "js": [
+        "responsivevoice.js", "content-script.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}
