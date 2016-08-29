@@ -1,0 +1,19 @@
+body {
+    width: 140px;
+    padding: 20px;
+}
+
+#toggle-enable {
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#toggle-enable a img {
+    width: 100%;
+}
+
+#toggle-enable a:hover img {
+    opacity: 0.5;
+}

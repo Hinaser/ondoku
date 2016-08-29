@@ -20,15 +20,30 @@
       "description": "Send a toggle-feature event"
     }
   },
+  "browser_action": {
+    "browser_style": true,
+    "default_icon": {
+      "16": "lib/images/speaker_mute_16.png"
+    },
+    "default_title": "Ondoku",
+    "default_popup": "browser-action/popup.html"
+  },
+  "background": {
+    "scripts": ["lib/javascripts/jquery-3.1.0.min.js", "background/main.js"],
+    "page": "background/main.html"
+  },
   "content_scripts": [
     {
       "matches": [
         "*://*/*"
       ],
       "js": [
-        "responsivevoice.js", "content-script.js"
+        "lib/javascripts/responsivevoice.js", "content-script.js"
       ],
-      "run_at": "document_end"
+      "run_at": "document_start"
     }
+  ],
+  "permissions": [
+    "storage", "tabs", "activeTab"
   ]
 }
