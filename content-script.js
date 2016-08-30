@@ -25,7 +25,7 @@ function merge_options(obj1,obj2) {
  * @param {*} obj - Something you want to look inside.
  */
 function debug(obj){
-    chrome.runtime.sendMessage(null, obj, null, null);
+    chrome.runtime.sendMessage(obj, function(res){});
 }
 
 /**
@@ -136,7 +136,7 @@ Speaker.prototype.cancel = function(){
 const speaker = new Speaker();
 
 /**
- * Listening to text selection event, well, virtually.
+ * Listening to text selection event, well, virtually. In fact, this listens to 'mouseup' event.
  * If text selection has been made, pops up button to stream voice corresponding to selected text.
  */
 function makeVoice(){
@@ -147,14 +147,36 @@ function makeVoice(){
         return;
     }
 
-    chrome.storage.local.get('language', function(data){
+    chrome.storage.local.get('auto_detect_language', function(data){
         let lang = 'UK English Female';
 
-        if(data.hasOwnProperty('language') && data.language){
-            lang = data.language;
-        }
+        if(data.hasOwnProperty('auto_detect_language') && data.auto_detect_language){
+            guessLanguage.detect(text, function(langCode){
+                const voice = voiceText(langCode);
 
-        speaker.speak(text, lang);
+                // When voice is undefined, try to speak English.
+                if(voice){
+                    debug("[ondoku] Auto detected voice type for the text: " + voice);
+
+                    // Utter!
+                    speaker.speak(text, voice);
+                }
+                else{
+                    debug("[ondoku] Could not detect language of selected text.");
+                    speaker.speak(text);
+                }
+            });
+        }
+        else{
+            chrome.storage.local.get('language', function(data){
+                if(data.hasOwnProperty('language') && data.language){
+                    lang = data.language;
+                }
+
+                // Utter!
+                speaker.speak(text, lang);
+            });
+        }
     });
 }
 

@@ -38,7 +38,11 @@
         "*://*/*"
       ],
       "js": [
-        "lib/javascripts/responsivevoice.js", "content-script.js"
+        "lib/javascripts/responsivevoice.js",
+        "lib/javascripts/_languageData.js",
+        "lib/javascripts/guessLanguage.js",
+        "lib/javascripts/countryCode2voiceLocale.js",
+        "content-script.js"
       ],
       "run_at": "document_start"
     }
