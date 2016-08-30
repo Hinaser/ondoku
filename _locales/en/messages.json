@@ -1,0 +1,22 @@
+{
+  "extensionName": {
+    "message": "Ondoku, a Text To Speach (TTS) addon for your browser",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "Turn selected text in a web site into voice speech using ResponsiveVoice.JS",
+    "description": "Description of the extension."
+  },
+  "poweredOff": {
+    "message": "Disabled"
+  },
+  "poweredOn": {
+    "message": "Enabled"
+  },
+  "showPlayButtons": {
+    "message": "Show play buttons"
+  },
+  "autoDetectLanguage": {
+    "message": "Auto detect language"
+  }
+}

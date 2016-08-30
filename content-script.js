@@ -19,6 +19,16 @@ function merge_options(obj1,obj2) {
 }
 
 /**
+ * Send object wanted to inspect to background script to debug.
+ * Since currently (as of 30th Aug 2016), firefox cannot output log by console.log in content scripts.
+ *
+ * @param {*} obj - Something you want to look inside.
+ */
+function debug(obj){
+    chrome.runtime.sendMessage(null, obj, null, null);
+}
+
+/**
  * Speaker class
  */
 const Speaker = function(){
@@ -104,15 +114,15 @@ Speaker.prototype.speak = function(text, locale, option){
 
     this.setupOption(option);
 
-    // If text is not specified, get selected text on current web page.
-    if(!text){
-        text = this.textSelected();
-
-        if(!text) return;
-    }
-
     responsiveVoice.cancel();
-    responsiveVoice.speak(text);
+    responsiveVoice.speak(text, locale, option);
+};
+
+/**
+ * Cancel speaking voice
+ */
+Speaker.prototype.cancel = function(){
+    responsiveVoice.cancel();
 };
 
 
@@ -130,8 +140,28 @@ const speaker = new Speaker();
  * If text selection has been made, pops up button to stream voice corresponding to selected text.
  */
 function makeVoice(){
-    speaker.speak();
+    const text = speaker.textSelected();
+    // If text is not specified, get selected text on current web page.
+    if(!text){
+        speaker.cancel();
+        return;
+    }
+
+    chrome.storage.local.get('language', function(data){
+        let lang = 'UK English Female';
+
+        if(data.hasOwnProperty('language') && data.language){
+            lang = data.language;
+        }
+
+        speaker.speak(text, lang);
+    });
 }
+
+// Remove event handler if it is already attached. (Maybe this is useful only in development phase)
+document.removeEventListener('mouseup', makeVoice);
+
+// Setup event for text to speak
 chrome.storage.local.get('enabled', function(data){
     if(data.hasOwnProperty('enabled') && data.enabled){
         document.addEventListener('mouseup', makeVoice);
@@ -148,12 +178,14 @@ function messageListener(message, sender, sendResponse){
 
         if(message.enabled){
             document.addEventListener('mouseup', makeVoice);
-            sendResponse({message: 'Enabled'})
+            sendResponse({message: 'Enabled'});
         }
         else{
-            sendResponse({message: 'Disabled'})
+            sendResponse({message: 'Disabled'});
         }
     }
+
+    return true;
 }
 
 chrome.runtime.onMessage.addListener(messageListener);

@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Text to Speech extension",
+  "name": "__MSG_extensionName__",
   "version": "1.0",
   "applications": {
     "gecko": {
@@ -10,7 +10,8 @@
     }
   },
 
-  "description": "Turn selected text in a web site into voice speech using ResponsiveVoice.JS",
+  "default_locale": "en",
+  "description": "__MSG_extensionDescription__",
   "homepage_url": "https://github.com/Hinaser/ondoku",
   "commands": {
     "toggle-feature": {
@@ -25,11 +26,10 @@
     "default_icon": {
       "16": "lib/images/speaker_mute_16.png"
     },
-    "default_title": "Ondoku",
+    "default_title": "__MSG_extensionName__",
     "default_popup": "browser-action/popup.html"
   },
   "background": {
-    "scripts": ["lib/javascripts/jquery-3.1.0.min.js", "background/main.js"],
     "page": "background/main.html"
   },
   "content_scripts": [

@@ -1,6 +1,16 @@
 body {
-    width: 140px;
     padding: 20px;
+    width: 260px;
+    overflow: hidden;
+}
+
+#title{
+    margin-top: -10px;
+    margin-bottom: 15px;
+    padding: 7px;
+    border-radius: 6px;
+    text-align: center;
+    background-color: #DDD;
 }
 
 #toggle-enable {
@@ -10,10 +20,24 @@ body {
     text-align: center;
 }
 
-#toggle-enable a img {
-    width: 100%;
+#toggle-enable a {
+    display: block;
 }
 
 #toggle-enable a:hover img {
     opacity: 0.5;
+}
+
+#locale-selection {
+    margin-top: 15px;
+    font-size: 12px;
+    max-width: 200px;
+}
+
+select#locale-selection option {
+    font-size: 12px;
+}
+
+#settings .checkbox input {
+    display: inline-block;
 }

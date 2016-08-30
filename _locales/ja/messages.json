@@ -1,0 +1,23 @@
+{
+  "extensionName": {
+    "message": "Ondoku (音読)",
+    "description": "Name of the extension."
+  },
+  "extensionDescription": {
+    "message": "ResponsiveVoice.JSを利用して、選択したテキストをブラウザに音読させるアドオン",
+    "description": "Description of the extension."
+  },
+  "poweredOff": {
+    "message": "無効"
+  },
+  "poweredOn": {
+    "message": "有効"
+  },
+  "showPlayButtons": {
+    "message": "再生ボタンを表示する"
+  },
+  "autoDetectLanguage": {
+    "message": "言語を自動検知する"
+  }
+
+}
