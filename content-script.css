@@ -1,0 +1,49 @@
+#-web-extension-ondoku-buttons {
+    border: 1px solid #DDD;
+    background-color: white;
+    border-radius: 6px;
+    padding: 3px;
+    opacity: 0.9;
+}
+
+.-web-extension-ondoku-btn-group {
+    text-align: center;
+    width: 27px;
+    height: 27px;
+}
+
+#-web-extension-ondoku-btn-play {
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+}
+
+#-web-extension-ondoku-btn-play img {
+    width: 100%;
+}
+
+#-web-extension-ondoku-btn-play:hover {
+    cursor: pointer;
+}
+
+#-web-extension-ondoku-btn-play:hover img {
+    opacity: 0.5;
+}
+
+#-web-extension-ondoku-btn-stop {
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+}
+
+#-web-extension-ondoku-btn-stop img {
+    width: 100%;
+}
+
+#-web-extension-ondoku-btn-stop:hover {
+    cursor: pointer;
+}
+
+#-web-extension-ondoku-btn-stop:hover img {
+    opacity: 0.5;
+}

@@ -42,12 +42,21 @@
         "lib/javascripts/_languageData.js",
         "lib/javascripts/guessLanguage.js",
         "lib/javascripts/countryCode2voiceLocale.js",
+        "lib/javascripts/jquery-3.1.0.min.js",
+        "lib/javascripts/jquery-ui.min.js",
         "content-script.js"
+      ],
+      "css": [
+        "content-script.css"
       ],
       "run_at": "document_start"
     }
   ],
   "permissions": [
     "storage", "tabs", "activeTab"
+  ],
+  "web_accessible_resources": [
+    "lib/images/play_voice_48.png",
+    "lib/images/stop_voice_48.png"
   ]
 }

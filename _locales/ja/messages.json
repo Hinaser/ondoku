@@ -14,7 +14,7 @@
     "message": "有効"
   },
   "showPlayButtons": {
-    "message": "再生ボタンを表示する"
+    "message": "コントロールボタンを表示する"
   },
   "autoDetectLanguage": {
     "message": "言語を自動検知する"
