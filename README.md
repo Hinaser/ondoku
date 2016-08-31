@@ -1,8 +1,10 @@
 # README
 
 Text to speech extension for browsers, thanks to API by ResponsiveVoice.js.
+
 The feature is simple.
 When you make a text selection, the text speaks.
+
 TTS(Text To Speech) functionality comes from [ResponsiveVoiceJS](http://responsivevoice.org/).
 So if you feel that this extension is useful, please give thanks to the original API provider [ResponsiveVoiceJS](http://responsivevoice.org/).
 To toggle on/off of this extension, please click a speaker button on the browser's toolbar button.

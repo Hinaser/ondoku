@@ -9,7 +9,7 @@ const initPopup = function(){
     $('#show-play-buttons').parent().append(chrome.i18n.getMessage("showPlayButtons"));
     $('#auto-detect-language').parent().append(chrome.i18n.getMessage("autoDetectLanguage"));
     $("#manual-voice-selection header").text(chrome.i18n.getMessage("manualVoiceSelect"));
-    $("#manual-voice-selection header").attr(chrome.i18n.getMessage("titleManualVoiceSelect"));
+    $("#manual-voice-selection header").attr("title", chrome.i18n.getMessage("titleManualVoiceSelect"));
     $(".preferable-voices header").text(chrome.i18n.getMessage("labelPreferableVoice"));
     $(".preferable-voices header").attr("title", chrome.i18n.getMessage("titlePreferableVoice"));
 
@@ -25,10 +25,10 @@ const initPopup = function(){
         "preferable_voice_Serbo",
         "preferable_voice_Romanian"
     ], function(data){
-        // For the first time user run this addon, voice speaking feature is disabled.
-        if(data.hasOwnProperty('enabled') && data.enabled){
-            setPopupIcon(true);
+        if(data.hasOwnProperty('enabled')){
+            setPopupIcon(data.enabled);
         }
+        // For the first time user run this extension, voice speaking feature is disabled by default.
         else{
             setPopupIcon(false);
         }
@@ -40,9 +40,17 @@ const initPopup = function(){
         if(data.hasOwnProperty('show_play_buttons')){
             setShowButtonsCheckbox(data.show_play_buttons);
         }
+        // By default, this option should be true.
+        else{
+            setShowButtonsCheckbox(true);
+        }
 
         if(data.hasOwnProperty('auto_detect_language')){
             setAutoDetectLangCheckbox(data.auto_detect_language);
+        }
+        // By default, this option should be true.
+        else{
+            setAutoDetectLangCheckbox(true);
         }
 
         if(data.hasOwnProperty('preferable_voice_English')){
