@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extensionName__",
-  "version": "1.0",
+  "version": "0.0.1",
   "applications": {
     "gecko": {
       "id": "ondoku@mozilla.org",
@@ -13,14 +13,6 @@
   "default_locale": "en",
   "description": "__MSG_extensionDescription__",
   "homepage_url": "https://github.com/Hinaser/ondoku",
-  "commands": {
-    "toggle-feature": {
-      "suggested-key": {
-        "default": "Insert"
-      },
-      "description": "Send a toggle-feature event"
-    }
-  },
   "browser_action": {
     "browser_style": true,
     "default_icon": {
