@@ -13,63 +13,12 @@
 <header id="title"></header>
 <div id="toggle-enable">
     <a id="power-btn" href="#"><img src="power-off.png" /></a>
-    <label>t</label>
+    <label></label>
 </div>
 
 <div id="settings">
-    <select id="locale-selection">
-        <option value="UK English Female">UK English Female</option>
-        <option value="UK English Male">UK English Male</option>
-        <option value="US English Female">US English Female</option>
-        <option value="Spanish Female">Spanish Female</option>
-        <option value="French Female">French Female</option>
-        <option value="Deutsch Female">Deutsch Female</option>
-        <option value="Italian Female">Italian Female</option>
-        <option value="Greek Female">Greek Female</option>
-        <option value="Hungarian Female">Hungarian Female</option>
-        <option value="Turkish Female">Turkish Female</option>
-        <option value="Russian Female">Russian Female</option>
-        <option value="Dutch Female">Dutch Female</option>
-        <option value="Swedish Female">Swedish Female</option>
-        <option value="Norwegian Female">Norwegian Female</option>
-        <option value="Japanese Female">Japanese Female</option>
-        <option value="Korean Female">Korean Female</option>
-        <option value="Chinese Female">Chinese Female</option>
-        <option value="Hindi Female">Hindi Female</option>
-        <option value="Serbian Male">Serbian Male</option>
-        <option value="Croatian Male">Croatian Male</option>
-        <option value="Bosnian Male">Bosnian Male</option>
-        <option value="Romanian Male">Romanian Male</option>
-        <option value="Catalan Male">Catalan Male</option>
-        <option value="Australian Female">Australian Female</option>
-        <option value="Finnish Female">Finnish Female</option>
-        <option value="Afrikaans Male">Afrikaans Male</option>
-        <option value="Albanian Male">Albanian Male</option>
-        <option value="Arabic Male">Arabic Male</option>
-        <option value="Armenian Male">Armenian Male</option>
-        <option value="Czech Female">Czech Female</option>
-        <option value="Danish Female">Danish Female</option>
-        <option value="Esperanto Male">Esperanto Male</option>
-        <option value="Hatian Creole Female">Hatian Creole Female</option>
-        <option value="Icelandic Male">Icelandic Male</option>
-        <option value="Indonesian Female">Indonesian Female</option>
-        <option value="Latin Female">Latin Female</option>
-        <option value="Latvian Male">Latvian Male</option>
-        <option value="Macedonian Male">Macedonian Male</option>
-        <option value="Moldavian Male">Moldavian Male</option>
-        <option value="Montenegrin Male">Montenegrin Male</option>
-        <option value="Polish Female">Polish Female</option>
-        <option value="Brazilian Portuguese Female">Brazilian Portuguese Female</option>
-        <option value="Portuguese Female">Portuguese Female</option>
-        <option value="Serbo-Croatian Male">Serbo-Croatian Male</option>
-        <option value="Slovak Female">Slovak Female</option>
-        <option value="Spanish Latin American Female">Spanish Latin American Female</option>
-        <option value="Swahili Male">Swahili Male</option>
-        <option value="Tamil Male">Tamil Male</option>
-        <option value="Thai Female">Thai Female</option>
-        <option value="Vietnamese Male">Vietnamese Male</option>
-        <option value="Welsh Male">Welsh Male</option>
-    </select>
+    <hr />
+
     <div class="checkbox">
         <label>
             <input type="checkbox" id="show-play-buttons">
@@ -79,6 +28,102 @@
         <label>
             <input type="checkbox" id="auto-detect-language">
         </label>
+    </div>
+
+    <div id="manual-voice-selection">
+        <hr />
+
+        <header title="Available only when you disable auto language detection option">
+            Manual voice selection
+        </header>
+        <select id="locale-selection">
+            <option value="Afrikaans Male">Afrikaans Male</option>
+            <option value="Albanian Male">Albanian Male</option>
+            <option value="Arabic Male">Arabic Male</option>
+            <option value="Armenian Male">Armenian Male</option>
+            <option value="Australian Female">Australian Female</option>
+            <option value="Bosnian Male">Bosnian Male</option>
+            <option value="Brazilian Portuguese Female">Brazilian Portuguese Female</option>
+            <option value="Catalan Male">Catalan Male</option>
+            <option value="Chinese Female">Chinese Female</option>
+            <option value="Croatian Male">Croatian Male</option>
+            <option value="Czech Female">Czech Female</option>
+            <option value="Danish Female">Danish Female</option>
+            <option value="Deutsch Female">Deutsch Female</option>
+            <option value="Dutch Female">Dutch Female</option>
+            <option value="Esperanto Male">Esperanto Male</option>
+            <option value="Finnish Female">Finnish Female</option>
+            <option value="French Female">French Female</option>
+            <option value="Greek Female">Greek Female</option>
+            <option value="Hatian Creole Female">Hatian Creole Female</option>
+            <option value="Hindi Female">Hindi Female</option>
+            <option value="Hungarian Female">Hungarian Female</option>
+            <option value="Icelandic Male">Icelandic Male</option>
+            <option value="Indonesian Female">Indonesian Female</option>
+            <option value="Italian Female">Italian Female</option>
+            <option value="Japanese Female">Japanese Female</option>
+            <option value="Korean Female">Korean Female</option>
+            <option value="Latin Female">Latin Female</option>
+            <option value="Latvian Male">Latvian Male</option>
+            <option value="Macedonian Male">Macedonian Male</option>
+            <option value="Moldavian Male">Moldavian Male</option>
+            <option value="Montenegrin Male">Montenegrin Male</option>
+            <option value="Norwegian Female">Norwegian Female</option>
+            <option value="Polish Female">Polish Female</option>
+            <option value="Portuguese Female">Portuguese Female</option>
+            <option value="Romanian Male">Romanian Male</option>
+            <option value="Russian Female">Russian Female</option>
+            <option value="Serbian Male">Serbian Male</option>
+            <option value="Serbo-Croatian Male">Serbo-Croatian Male</option>
+            <option value="Slovak Female">Slovak Female</option>
+            <option value="Spanish Female">Spanish Female</option>
+            <option value="Spanish Latin American Female">Spanish Latin American Female</option>
+            <option value="Swahili Male">Swahili Male</option>
+            <option value="Swedish Female">Swedish Female</option>
+            <option value="Tamil Male">Tamil Male</option>
+            <option value="Thai Female">Thai Female</option>
+            <option value="Turkish Female">Turkish Female</option>
+            <option value="UK English Female">UK English Female</option>
+            <option value="UK English Male">UK English Male</option>
+            <option value="US English Female">US English Female</option>
+            <option value="Vietnamese Male">Vietnamese Male</option>
+            <option value="Welsh Male">Welsh Male</option>
+        </select>
+    </div>
+
+    <div class="preferable-voices">
+        <hr />
+
+        <header title="Some languages have multiple associated voices.
+Please select a voice to stream if text is composed of those language.">Please select your preferable voice for auto detection.</header>
+        <label for="English-preferable-voice">English</label>
+        <select id="English-preferable-voice">
+            <option value="Australian Female">Australian Female</option>
+            <option value="UK English Female">UK English Female</option>
+            <option value="UK English Male">UK English Male</option>
+            <option value="US English Female">US English Female</option>
+        </select>
+        <label for="Portuguese-preferable-voice">Portuguese</label>
+        <select id="Portuguese-preferable-voice">
+            <option value="Brazilian Portuguese Female">Brazilian Portuguese Female</option>
+            <option value="Portuguese Female">Portuguese Female</option>
+        </select>
+        <label for="Spanish-preferable-voice">Spanish</label>
+        <select id="Spanish-preferable-voice">
+            <option value="Spanish Female">Spanish Female</option>
+            <option value="Spanish Latin American Female">Spanish Latin American Female</option>
+        </select>
+        <label for="Serbo-Croatian-preferable-voice">Serbo-Croatian</label>
+        <select id="Serbo-Croatian-preferable-voice">
+            <option value="Bosnian Male">Bosnian Male</option>
+            <option value="Montenegrin Male">Montenegrin Male</option>
+            <option value="Serbo-Croatian Male">Serbo-Croatian Male</option>
+        </select>
+        <label for="Romanian-preferable-voice">Romanian</label>
+        <select id="Romanian-preferable-voice">
+            <option value="Moldavian Male">Moldavian Male</option>
+            <option value="Romanian Male">Romanian Male</option>
+        </select>
     </div>
 </div>
 </body>

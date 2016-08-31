@@ -10,7 +10,7 @@
     }
   },
 
-  "default_locale": "en",
+  "default_locale": "ja",
   "description": "__MSG_extensionDescription__",
   "homepage_url": "https://github.com/Hinaser/ondoku",
   "commands": {

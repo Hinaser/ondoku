@@ -5,12 +5,26 @@ const initPopup = function(){
     // Set header title
     $('#title').text(chrome.i18n.getMessage("extensionName"));
 
-    // Set check box label
+    // Set up i18n
     $('#show-play-buttons').parent().append(chrome.i18n.getMessage("showPlayButtons"));
     $('#auto-detect-language').parent().append(chrome.i18n.getMessage("autoDetectLanguage"));
+    $("#manual-voice-selection header").text(chrome.i18n.getMessage("manualVoiceSelect"));
+    $("#manual-voice-selection header").attr(chrome.i18n.getMessage("titleManualVoiceSelect"));
+    $(".preferable-voices header").text(chrome.i18n.getMessage("labelPreferableVoice"));
+    $(".preferable-voices header").attr("title", chrome.i18n.getMessage("titlePreferableVoice"));
 
-    // Set icon according to current on/off setting
-    chrome.storage.local.get('enabled', function(data){
+    // Set initial settings from saved setting.
+    chrome.storage.local.get([
+        "enabled",
+        "language",
+        "show_play_buttons",
+        "auto_detect_language",
+        "preferable_voice_English",
+        "preferable_voice_Portuguese",
+        "preferable_voice_Spanish",
+        "preferable_voice_Serbo",
+        "preferable_voice_Romanian"
+    ], function(data){
         // For the first time user run this addon, voice speaking feature is disabled.
         if(data.hasOwnProperty('enabled') && data.enabled){
             setPopupIcon(true);
@@ -18,26 +32,37 @@ const initPopup = function(){
         else{
             setPopupIcon(false);
         }
-    });
 
-    // Set selected option for language
-    chrome.storage.local.get('language', function(data){
         if(data.hasOwnProperty('language') && data.language){
             setSelectedOption(data.language);
         }
-    });
 
-    // Set checkbox for showing play buttons
-    chrome.storage.local.get('show_play_buttons', function(data){
         if(data.hasOwnProperty('show_play_buttons')){
             setShowButtonsCheckbox(data.show_play_buttons);
         }
-    });
 
-    // Set checkbox for auto detect language
-    chrome.storage.local.get('auto_detect_language', function(data){
         if(data.hasOwnProperty('auto_detect_language')){
             setAutoDetectLangCheckbox(data.auto_detect_language);
+        }
+
+        if(data.hasOwnProperty('preferable_voice_English')){
+            $("#English-preferable-voice").find("option:contains('" + data.preferable_voice_English + "')").attr("selected", true);
+        }
+
+        if(data.hasOwnProperty('preferable_voice_Portuguese')){
+            $("#Portuguese-preferable-voice").find("option:contains('" + data.preferable_voice_Portuguese + "')").attr("selected", true);
+        }
+
+        if(data.hasOwnProperty('preferable_voice_Spanish')){
+            $("#Spanish-preferable-voice").find("option:contains('" + data.preferable_voice_Spanish + "')").attr("selected", true);
+        }
+
+        if(data.hasOwnProperty('preferable_voice_Serbo')){
+            $("#Serbo-Croatian-preferable-voice").find("option:contains('" + data.preferable_voice_Serbo + "')").attr("selected", true);
+        }
+
+        if(data.hasOwnProperty('preferable_voice_Romanian')){
+            $("#Romanian-preferable-voice").find("option:contains('" + data.preferable_voice_Romanian + "')").attr("selected", true);
         }
     });
 
@@ -70,6 +95,47 @@ const initPopup = function(){
     $('#auto-detect-language').on('change', function(){
         setAutoDetectLangCheckbox($(this).prop('checked'));
     });
+
+    // Monitor preferable language selection change for English
+    $("#English-preferable-voice").on('change', function(){
+        const lang = $("#English-preferable-voice").val();
+        chrome.storage.local.set({
+            preferable_voice_English: lang
+        })
+    });
+
+    // Monitor preferable language selection change for Portuguese
+    $("#Portuguese-preferable-voice").on('change', function(){
+        const lang = $("#Portuguese-preferable-voice").val();
+        chrome.storage.local.set({
+            preferable_voice_Portuguese: lang
+        })
+    });
+
+    // Monitor preferable language selection change for Spanish
+    $("#Spanish-preferable-voice").on('change', function(){
+        const lang = $("#Spanish-preferable-voice").val();
+        chrome.storage.local.set({
+            preferable_voice_Spanish: lang
+        })
+    });
+
+    // Monitor preferable language selection change for Serbo-Croatian
+    $("#Serbo-Croatian-preferable-voice").on('change', function(){
+        const lang = $("#Serbo-Croatian-preferable-voice").val();
+        chrome.storage.local.set({
+            preferable_voice_Serbo: lang
+        })
+    });
+
+    // Monitor preferable language selection change for Romanian
+    $("#Romanian-preferable-voice").on('change', function(){
+        const lang = $("#Romanian-preferable-voice").val();
+        chrome.storage.local.set({
+            preferable_voice_Romanian: lang
+        })
+    });
+
 };
 
 /**

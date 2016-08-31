@@ -17,6 +17,23 @@ function debug(obj){
 }
 
 /**
+ * Function to output summerized error by console.error while trying to do speak.
+ * @param {String} voice
+ * @param {String} text
+ * @param {Object} option
+ * @param {Error} e
+ */
+function log_error_while_speaking(voice, text, option, e=null){
+    if(e){
+        debug("[ondoku] Exception raised while trying to speak" + e);
+    }
+    debug("[ondoku] Voice: " + voice);
+    debug("[ondoku] Text: " + text);
+    debug("[ondoku] Option: ");
+    debug(option);
+}
+
+/**
  * Show play/stop/resume buttons on a web page
  *
  * @param {Speaker} speaker
@@ -76,9 +93,15 @@ function setupPlayButton(){
     const stop_btn = setupStopButton();
 
     play_btn.on('click', function(e){
+        speaker.cancel();
         speaker.speak(speaker.textSelected(), {
             onstart: function(){
                 play_btn.replaceWith(stop_btn);
+            },
+            onend: function(){
+                speaker.cancel();
+                const new_play_btn = setupPlayButton();
+                stop_btn.replaceWith(new_play_btn);
             }
         });
     });
@@ -112,7 +135,7 @@ function getSelectionLocation() {
  */
 const Speaker = function(){
     if(!responsiveVoice){
-        console.error('responsivevoice.js is not loaded.');
+        debug('responsivevoice.js is not loaded.');
         throw false;
     }
 
@@ -121,6 +144,10 @@ const Speaker = function(){
         pitch: 1,
         rate: 1,
         volume: 1,
+        onerror: function(e){
+            debug("[ondoku] Error while trying to speak: " );
+            debug(e);
+        }
     };
 };
 
@@ -146,29 +173,70 @@ Speaker.prototype.textSelected = function(){
  * @param {Object=} option - Option
  */
 Speaker.prototype.speak = function(text, option={}){
-    debug(option);
     this.setupOption(option);
-    debug(this.option);
 
     chrome.storage.local.get('auto_detect_language', (data)=>{
         if(data.hasOwnProperty('auto_detect_language') && data.auto_detect_language){
             guessLanguage.detect(text, (langCode)=>{
-                const voice = voiceText(langCode);
+                chrome.storage.local.get([
+                    "preferable_voice_English",
+                    "preferable_voice_Portuguese",
+                    "preferable_voice_Spanish",
+                    "preferable_voice_Serbo",
+                    "preferable_voice_Romanian"
+                ], (data)=>{
+                    const preferable_voice = {};
 
-                // When voice is undefined, try to speak English.
-                if(voice){
-                    debug("[ondoku] Auto detected voice type for the text: " + voice);
+                    if(data.hasOwnProperty("preferable_voice_English")){
+                        preferable_voice['en'] = data["preferable_voice_English"];
+                    }
+                    if(data.hasOwnProperty("preferable_voice_Portuguese")){
+                        preferable_voice['pt'] = data["preferable_voice_Portuguese"];
+                    }
+                    if(data.hasOwnProperty("preferable_voice_Spanish")){
+                        preferable_voice['es'] = data["preferable_voice_Spanish"];
+                    }
+                    if(data.hasOwnProperty("preferable_voice_Serbo")){
+                        preferable_voice['sh'] = data["preferable_voice_Serbo"];
+                    }
+                    if(data.hasOwnProperty("preferable_voice_Romanian")){
+                        preferable_voice['ro'] = data["preferable_voice_Romanian"];
+                    }
 
-                    // Utter!
-                    responsiveVoice.cancel();
-                    responsiveVoice.speak(text, voice, this.option);
-                }
-                else{
-                    debug("[ondoku] Could not detect language of selected text.");
-                    debug("[ondoku] Falling back to default voice setting: " + this.default_voice);
-                    responsiveVoice.cancel();
-                    responsiveVoice.speak(text, this.default_voice, this.option);
-                }
+                    const voice = voiceText(langCode, preferable_voice);
+
+                    // When voice is undefined, try to speak English.
+                    if(voice){
+                        debug("[ondoku] Auto detected voice type for the text: " + voice);
+                        debug('[ondoku] Text to be spoken: "' + text + '"');
+                        debug("[ondoku] Option:");
+                        debug(this.option);
+
+                        // Utter!
+                        responsiveVoice.cancel();
+                        try{
+                            responsiveVoice.speak(text, voice, this.option);
+                        }
+                        catch(e){
+                            log_error_while_speaking(e, voice, text, this.option);
+                        }
+                    }
+                    else{
+                        debug("[ondoku] Could not detect language of selected text.");
+                        debug("[ondoku] Falling back to default voice setting: " + this.default_voice);
+                        debug('[ondoku] Text to be spoken: "' + text + "'");
+                        debug("[ondoku] Option:");
+                        debug(this.option);
+
+                        responsiveVoice.cancel();
+                        try{
+                            responsiveVoice.speak(text, this.default_voice, this.option);
+                        }
+                        catch(e){
+                            log_error_while_speaking(e, this.default_voice, text, this.option);
+                        }
+                    }
+                });
             });
         }
         else{
@@ -179,9 +247,19 @@ Speaker.prototype.speak = function(text, option={}){
                     voice = data.language;
                 }
 
+                debug('[ondoku] Text to be spoken: "' + text + '"');
+                debug("[ondoku] Voice type: " + voice);
+                debug("[ondoku] Option:");
+                debug(this.option);
+
                 // Utter!
                 responsiveVoice.cancel();
-                responsiveVoice.speak(text, voice, this.option);
+                try{
+                    responsiveVoice.speak(text, voice, this.option);
+                }
+                catch(e){
+                    log_error_while_speaking(e, voice, text, this.option);
+                }
             });
         }
     });

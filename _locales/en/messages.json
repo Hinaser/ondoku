@@ -18,5 +18,17 @@
   },
   "autoDetectLanguage": {
     "message": "Auto detect language"
+  },
+  "manualVoiceSelect": {
+    "message": "Manual voice selection"
+  },
+  "titleManualVoiceSelect": {
+    "message": "Available only when you disable auto language detection option"
+  },
+  "labelPreferableVoice": {
+    "message": "Please select your preferable voice for auto detection."
+  },
+  "titlePreferableVoice": {
+    "message": "Some languages have multiple associated voices.\nPlease select a voice to stream if text is composed of those language."
   }
 }

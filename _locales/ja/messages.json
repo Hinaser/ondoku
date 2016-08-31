@@ -18,6 +18,17 @@
   },
   "autoDetectLanguage": {
     "message": "言語を自動検知する"
+  },
+  "manualVoiceSelect": {
+    "message": "音声手動選択"
+  },
+  "titleManualVoiceSelect": {
+    "message": "言語の自動検知時をオフにしているときに指定します"
+  },
+  "labelPreferableVoice": {
+    "message": "言語自動検知時に優先する音声を選択してください。"
+  },
+  "titlePreferableVoice": {
+    "message": "複数の音声が紐付いている言語があります。\nそのような言語のテキストを喋らせる際に優先する音声を選択してください。"
   }
-
 }
