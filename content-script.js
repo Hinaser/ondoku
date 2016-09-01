@@ -299,9 +299,14 @@ const speaker = new Speaker();
  * @param {Event} e - An event delegated from event listener.
  */
 function onMouseUp(e){
-    // In case addon button is clicked, do nothing. (Click handler is defined in button function)
+    // In case extension button is clicked, do nothing. (Click handler is defined in button function)
     const buttons = $("#" + panel_container_id);
     if(buttons.length > 0 && (buttons.is(e.target) || buttons.has(e.target).length > 0)){
+        return;
+    }
+
+    // In case voice is already streaming and button is displayed, do nothing.
+    if(speaker.isPlaying() && buttons.length > 0){
         return;
     }
 
