@@ -4,6 +4,7 @@
     border-radius: 6px;
     padding: 3px;
     opacity: 0.9;
+    z-index: 2147483647;
 }
 
 .-web-extension-ondoku-btn-group {
